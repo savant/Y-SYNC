@@ -1,0 +1,44 @@
+1. npm init
+2. under scripts, add "dev": "nodemon index.js"
+    a. nodemond auto reload node server on change
+3. install express & nodemon
+4. http://expressjs.com/en/starter/hello-world.html, create server-side js
+5. http://expressjs.com/en/starter/static-files.html
+
+6. run "dev" in cmd line to run nodemon; npm run dev
+7. create route in server side, pass to client side
+8. install npm install node-fetch
+
+
+
+
+https://socket.io/get-started/chat
+socket io - library that wraps around web socket technology | enables real-time, bidirectional and event-based communication between the browser and the server
+
+- web socket: on-going tcp connection between the client & server  
+- bidirectional data flow
+- server can push information rather than client having to request it every time. 
+
+
+add socket.io to frontend js
+npm install socket.io-client --save
+
+
+
+
+
+
+
+
+things to do
+
+- play video on join, along with timing: just need to hit 'play'
+- have to fix host video on join
+    - need video-id, curr time etc
+
+- might need to disable embeed pause/play/skip & only use custom
+- style
+- host
+- done
+
+line 111
