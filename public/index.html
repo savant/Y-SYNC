@@ -1,132 +1,122 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- <link rel="icon" href="../../favicon.ico"> -->
 
-    <title>Y-SYNC</title>
-    <link rel="icon" href="/images/32x32.png">
-    <!-- Bootstrap core CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
 
+  <title>Y-SYNC</title>
+  <link rel="icon" href="/images/32x32.png">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
+  <!-- Custom styles for this template -->
+  <link href="style.css" rel="stylesheet">
+</head>
 
-    <!-- Custom styles for this template -->
-    <link href="style.css" rel="stylesheet">
-  </head>
+<body>
+  <header id="head">
+    <a href="index.html">
+      <img src="/images/group.png"
+        style="max-height: 30px; width:auto; height:auto; margin-top: 10px; margin-left: 20px;">
+    </a>
+  </header>
 
-  <body>
-    <header id="head">
-      <a href="index.html">
-        <img src="/images/group.png" style="max-height: 30px; width:auto; height:auto; margin-top: 10px; margin-left: 20px;">
-      </a>
-    </header>
-  
   <main>
     <div id="landing">
       <div class="col-md-12">
-          <h2 id="title">Say Hello To<img src="/images/Frame.png" width="128px" height ="40px" style="margin-bottom:10px"> </h2>
-          <p class="summary">Synchronously watch YouTube videos with anyone, anywhere.</p>
-          <hr style="height:10pt; visibility:hidden;" />
+        <h2 id="title">Say Hello To<img src="/images/Frame.png" width="128px" height="40px" style="margin-bottom:10px">
+        </h2>
+        <p class="summary">Synchronously watch YouTube videos with anyone, anywhere.</p>
+        <hr style="height:10pt; visibility:hidden;" />
 
-          <h2>Join a Room.</h2>
-          <form id="form">
-              <div class="form-group">
-                  <label>Enter Name</label>
-                  <input type="text" class="form-control" id="handle" autocomplete="off" oninput ="this.setCustomValidity('')"/>
-                  <br />
-                  <label>Enter Room Name (Random by default)</label>
-                  <input type="text" class="form-control" id="room-input" autocomplete="off" oninput ="this.setCustomValidity('')"/>
-                  <br/>
-                  <!-- <a href="main.html"> -->
-                  <button type="submit" id = "enter" class="btn btn-primary">Enter </button>  
-                <!-- </a> -->
-              </div>
-          </form>
+        <h2>Join a Room.</h2>
+        <form id="form">
+          <div class="form-group">
+            <label>Enter Name</label>
+            <input type="text" class="form-control" id="handle" autocomplete="off"
+              oninput="this.setCustomValidity('')" />
+            <br />
+            <label>Enter Room Name (Random by default)</label>
+            <input type="text" class="form-control" id="room-input" autocomplete="off"
+              oninput="this.setCustomValidity('')" />
+            <br />
+            <button type="submit" id="enter" class="btn btn-primary">Enter </button>
+          </div>
+        </form>
       </div>
-  </div>
-
-  <section class = "main-content" id = "main">
-    <div class="controller">
-      
-      <input type="typeURL" id="url" class="form-control" placeholder= "Enter Youtube Url:" />
-      <button id = "btn" class = "btn btn-outline-dark" style = "margin-top: 10px">Submit</button>
-
-      <!-- <input type="text" id="room-input" class="form-control" placeholder= "Enter a room name:" autocomplete="off">
-      <button type="button" id="room-button" class = "btn btn-default btn-sm">Join</button> -->
     </div>
-    
-    <div id = "test" >
-    <!-- /.container -->
-    <div id = "video-chat">
+
+    <section class="main-content" id="main">
+      <div class="controller">
+
+        <input type="typeURL" id="url" class="form-control" placeholder="Enter Youtube Url:" />
+        <button id="btn" class="btn btn-outline-dark" style="margin-top: 10px">Submit</button>
+      </div>
+
+      <div id="video-chat">
         <div id="video-container">
-            <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-            <div id="player"></div> 
+          <div id="player"></div>
         </div>
-        <!-- <div id="message-container"> -->
-          <div id="chat">
-            <h2>Chat</h2>
-            <div id="chat-window">
-                <div id="output"></div>
-                <div id="feedback"></div>
-            </div>
-            <!-- <input id="handle" type="text" placeholder="Handle" /> -->
-            <input id="message" type="text" placeholder="Message" />
-            <div style="display: flex; flex-direction: row;">
-              <button id="send">Send</button>
-              <button id="emoji-button" style="background-color: white;">😀</button>
-            </div>
+        <div id="chat">
+          <h2>Chat</h2>
+          <div id="chat-window">
+            <div id="output"></div>
+            <div id="feedback"></div>
+          </div>
+          <input id="message" type="text" placeholder="Message" />
+          <div style="display: flex; flex-direction: row;">
+            <button id="send">Send</button>
+          </div>
         </div>
-    </div>
-  </div>
-    <!-- custom buttons -->
-    <div id ="player-controls">
-      <button id = "playVideo" type="button" class="btn btn-outline-dark btn-sm" aria-label = "Left Align" position = "fixed">Play
-      </button>
-      <!-- &nbsp; -->
-      <button id = "pauseVideo" type="button" class="btn btn-outline-dark btn-sm" aria-label = "Left Align" position = "fixed" style= "margin-left: 10px"> Pause
-      </button> 
-      <div id= "timing">
-        <div id = currTime style = "margin-left: 5px;"></div> <div style = "padding: 0px 3px"> / </div> <div id = totalTime></div>
       </div>
-      <!-- time line  -->
-       <div id= "progress-container"> 
-          <div id= "progress-bar"></div>
-          <div id= "progress-indicator"></div>
       </div>
-    </div>
-  </section>
+
+      <div id="player-controls">
+        <button id="playVideo" type="button" class="btn btn-outline-dark btn-sm" aria-label="Left Align"
+          position="fixed">Play
+        </button>
+        <button id="pauseVideo" type="button" class="btn btn-outline-dark btn-sm" aria-label="Left Align"
+          position="fixed" style="margin-left: 10px"> Pause
+        </button>
+        <div id="timing">
+          <div id=currTime style="margin-left: 5px;"></div>
+          <div style="padding: 0px 3px"> / </div>
+          <div id=totalTime></div>
+        </div>
+        <div id="progress-container">
+          <div id="progress-bar"></div>
+          <div id="progress-indicator"></div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer id = "page-footer">
-      <div>
-        <a href="index.html">
-          <img src="/images/Frame-2.png" width="128px" height ="40px">
-        </a>
-      <p id = "copyright" style="font-size: 12px;"> by Babatunde Akinsonu <br> All Rights Reserved.</p>
-      </div>
-    </footer>
-    
-    <!-- Bootstrap core JavaScript
+  <footer id="page-footer">
+    <div>
+      <a href="index.html">
+        <img src="/images/Frame-2.png" width="128px" height="40px">
+      </a>
+      <p id="copyright" style="font-size: 12px;"> by Babatunde Akinsonu <br> All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
-    <!-- script -->
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@4.6.0/dist/index.min.js"></script>
+  <!-- script -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+  <script src="chat.js"></script>
 
-    <script src="script.js"></script>
-    <script src="chat.js"></script>
+</body>
 
-  </body>
 </html>
