@@ -1,7 +1,7 @@
 {
   "name": "project",
   "version": "1.0.0",
-  "description": "",
+  "description": "<img src = \"https://user-images.githubusercontent.com/66487906/127748564-e78bdf70-c9f1-4f18-90ba-6965813f23f2.png\" width = 50%/>",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js"
@@ -16,5 +16,13 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.8"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/savant/Y-SYNC.git"
+  },
+  "bugs": {
+    "url": "https://github.com/savant/Y-SYNC/issues"
+  },
+  "homepage": "https://github.com/savant/Y-SYNC#readme"
 }
