@@ -2,6 +2,7 @@
 <img src = "https://user-images.githubusercontent.com/66487906/127748564-e78bdf70-c9f1-4f18-90ba-6965813f23f2.png" width = 50%/> 
 
 Say hello to Y-SYNC.<br />
+https://yt-s.herokuapp.com/ <br />
 Synchronously watch YouTube videos with anyone, anywhere.
 
 ## Installation
