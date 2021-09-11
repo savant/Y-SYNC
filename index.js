@@ -9,7 +9,7 @@ const {
 const io = new Server(server);
 
 
-const port = 3000; //set express port
+const port = process.env.PORT || 3000; //set express port
 
 app.use(express.static('public'))
 
