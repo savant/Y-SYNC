@@ -2,9 +2,8 @@
 var socket = io();
 const enterBtn = document.getElementById("enter");
 const inputURL = document.getElementById("url");
-const submitURLButton = $('#btn');
-var link_ID = '';
-
+const submitURLButton = $("#btn");
+var link_ID = "";
 
 enterBtn.addEventListener("click", () => {
   if (handle.value === "") {
@@ -17,8 +16,7 @@ enterBtn.addEventListener("click", () => {
     document.getElementById("page-footer").style.bottom = 1;
     document.getElementById("main").style.display = "block";
   }
-})
-
+});
 
 submitURLButton.click(function (event) {
   if (inputURL.value === "" || YouTubeGetID(inputURL.value) === null) {
@@ -26,91 +24,90 @@ submitURLButton.click(function (event) {
   } else {
     link_ID = YouTubeGetID(inputURL.value);
     const mydata = {
-      state: 'newVideo',
+      state: "newVideo",
       time: 0,
       id: link_ID,
-      room: roomInput.value
+      room: roomInput.value,
     };
-    socket.emit('event', mydata, mydata.room);
+    socket.emit("event", mydata, mydata.room);
   }
 });
 
-
-socket.on('event', msg => {
-  if (msg.state === 'newVideo') {
+socket.on("event", (msg) => {
+  if (msg.state === "newVideo") {
     loadVideoById(msg.id);
-  } else if (msg.state === 'play') {
+  } else if (msg.state === "play") {
     if (Math.abs(msg.time - player.getCurrentTime()) > 1) {
       seekTo(msg.time);
     }
     seekTo(msg.time);
     playVideo();
-  } else if (msg.state === 'pause') {
+  } else if (msg.state === "pause") {
     pauseVideo();
   }
 });
 
-
 initializeButtons();
 
 function initializeButtons() {
-  const playButton = $('#playVideo');
-  const pauseButton = $('#pauseVideo');
+  const playButton = $("#playVideo");
+  const pauseButton = $("#pauseVideo");
 
   playButton.click(function (event) {
     const mydata = {
-      state: 'play',
+      state: "play",
       time: player.getCurrentTime(),
-      room: roomInput.value
+      room: roomInput.value,
     };
-    socket.emit('event', mydata, mydata.room);
+    socket.emit("event", mydata, mydata.room);
   });
 
   pauseButton.click(function (event) {
     const mydata = {
-      state: 'pause',
+      state: "pause",
       time: player.getCurrentTime(),
-      room: roomInput.value
+      room: roomInput.value,
     };
-    socket.emit('event', mydata, mydata.room);
+    socket.emit("event", mydata, mydata.room);
   });
 }
 
 //https://stackoverflow.com/a/51870158
 function YouTubeGetID(url) {
-  let re = /^(https?:\/\/)?((www\.)?(youtube(-nocookie)?|youtube.googleapis)\.com.*(v\/|v=|vi=|vi\/|e\/|embed\/|user\/.*\/u\/\d+\/)|youtu\.be\/)([_0-9a-z-]+)/i;
+  let re =
+    /^(https?:\/\/)?((www\.)?(youtube(-nocookie)?|youtube.googleapis)\.com.*(v\/|v=|vi=|vi\/|e\/|embed\/|user\/.*\/u\/\d+\/)|youtu\.be\/)([_0-9a-z-]+)/i;
   return url.match(re) === null ? null : url.match(re)[7];
 }
 
 //https://developers.google.com/youtube/iframe_api_reference
 
 // 2. This code loads the IFrame Player API code asynchronously.
-var tag = document.createElement('script');
+var tag = document.createElement("script");
 tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
+var firstScriptTag = document.getElementsByTagName("script")[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 // 3. This function creates an <iframe> (and YouTube player)
 //    after the API code downloads.
 var player; //4096 × 3072
 function onYouTubeIframeAPIReady() {
-  player = new YT.Player('player', {
+  player = new YT.Player("player", {
     height: $("#video-container").height(),
     width: $("#video-container").width(),
     videoId: link_ID, //link_ID 'nhY1s6CZziE'
     events: {
-      'onReady': onPlayerReady,
-      'onStateChange': onPlayerStateChange
+      onReady: onPlayerReady,
+      onStateChange: onPlayerStateChange,
     },
     playerVars: {
-      'playsinline': 1,
+      playsinline: 1,
       //take out some youtube stuff https://developers.google.com/youtube/player_parameters
-      'controls': 0,
-      'disablekb': 1,
-      'modestbranding': 1,
-      'rel': 0,
-      'showinfo': 0,
-      'autoplay': 0,
+      controls: 0,
+      disablekb: 1,
+      modestbranding: 1,
+      rel: 0,
+      showinfo: 0,
+      autoplay: 0,
       // 'pointer-events': none,
     },
   });
@@ -118,7 +115,7 @@ function onYouTubeIframeAPIReady() {
 
 // 4. The API will call this function when the video player is ready.
 function onPlayerReady(event) {
-  //set size of progess bar 
+  //set size of progess bar
   // $('#line').css("width",player.getDuration());
   //  event.target.playVideo();
 }
@@ -147,12 +144,11 @@ function pauseVideo() {
   player.pauseVideo();
 }
 
-
 updateProgress();
 
 async function updateProgress() {
-  const progressBar = $('#progress-bar');
-  const progressIndicator = $('#progress-indicator');
+  const progressBar = $("#progress-bar");
+  const progressIndicator = $("#progress-indicator");
 
   //https://stackoverflow.com/questions/32540213/get-width-of-part-of-progress-bar-clicked-and-do-calculation-of-seconds
   progressBar.click(function (event) {
@@ -161,25 +157,31 @@ async function updateProgress() {
     const widthclicked = event.pageX - $this.offset().left;
     const totalWidth = $this.width();
 
-    const calculatedProgress = (widthclicked / totalWidth) * player.getDuration();
+    const calculatedProgress =
+      (widthclicked / totalWidth) * player.getDuration();
     const calculatedProgressRounded = calculatedProgress.toFixed();
 
     const mydata = {
-      state: 'play',
+      state: "play",
       time: calculatedProgressRounded,
-      room: roomInput.value
+      room: roomInput.value,
     };
-    socket.emit('event', mydata, mydata.room);
+    socket.emit("event", mydata, mydata.room);
   });
 
   setInterval(function () {
     if (player === null || progressBar === null) {
       return;
-    };
-    document.querySelector("#currTime").innerHTML = convert_time(player.getCurrentTime().toFixed());
-    document.querySelector("#totalTime").innerHTML = convert_time(player.getDuration().toFixed());
+    }
+    document.querySelector("#currTime").textContent = convert_time(
+      player.getCurrentTime().toFixed()
+    );
+    document.querySelector("#totalTime").textContent = convert_time(
+      player.getDuration().toFixed()
+    );
 
-    const progressRatio = (player.getCurrentTime() / player.getDuration()) * 100;
+    const progressRatio =
+      (player.getCurrentTime() / player.getDuration()) * 100;
     if (player.getCurrentTime() !== player.getDuration()) {
       progressIndicator.css("left", progressRatio.toString() + "%");
     }
@@ -195,7 +197,7 @@ function loadVideoById(id) {
 }
 
 function convert_time(seconds) {
-  return new Date(seconds * 1000).toISOString().substr(11, 8)
+  return new Date(seconds * 1000).toISOString().substr(11, 8);
 }
 
 const copyRight = document.getElementById("copyright");

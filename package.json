@@ -10,8 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "node-fetch": "^2.6.1",
-    "socket.io": "^4.1.2",
+    "node-fetch": "^2.6.7",
+    "socket.io": "^4.4.1",
     "socket.io-client": "^4.1.2"
   },
   "devDependencies": {
