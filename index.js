@@ -14,10 +14,6 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/landing.html");
 });
 
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/public/landing.html");
-});
-
 io.on("connection", (socket) => {
   socket.on("event", (msg, room) => {
     io.in(room).emit("event", msg);
