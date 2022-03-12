@@ -2,10 +2,16 @@
 const express = require("express"); //importing express module
 const app = express(); //creating express app
 const http = require("http");
-const server = http.createServer(app);
+const port = 3000; //set express port
+// const server = http.createServer(app);
+app.set("port", process.env.PORT || 3000);
 const { Server } = require("socket.io");
+
+const server = http.createServer(app).listen(app.get("port"), function () {
+  console.log("Express server listening on port " + app.get("port"));
+});
+
 const io = new Server(server);
-const port = process.env.PORT || 3000; //set express port
 
 app.use(express.static("public"));
 
@@ -41,8 +47,8 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(port, () => {
-  console.log(`listening on http://localhost:${port}`);
-});
+// server.listen(port, () => {
+//   console.log(`listening on http://localhost:${port}`);
+// });
 
 //https://gist.github.com/kylewelsby/2b49d2db31d45b939479
