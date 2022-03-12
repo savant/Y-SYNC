@@ -25,12 +25,11 @@ io.on("connection", (socket) => {
   function joinRoom(socket, room) {
     if (socket.room) {
       console.log("leaving room: " + socket.room);
-      io.in(room).emit("receive-msg", msg, userName);
       socket.leave(socket.room);
     }
     socket.join(room);
     socket.room = room;
-    console.info(socket.id + " joined room " + room, socket.room);
+    console.info(socket.id + " joined room " + room);
   }
 
   socket.on("join-room", (room, cb) => {
